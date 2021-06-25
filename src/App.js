@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {useDispatch,useSelector} from "react-redux";
 import {getData,setData,addTodoListData,deleteTodoListData,updateTodoListData} from './actions/TodoListAction'
 import axios from "axios";
+import {Input, Button, GridList, GridListTile, Typography,Box} from '@material-ui/core';
 
 function App() {
     const dispatch = useDispatch()
@@ -17,6 +18,8 @@ function App() {
                 dispatch(setData(res.data.data))
             })
 
+
+
     },[])
 
     function addTask(data){
@@ -26,9 +29,12 @@ function App() {
             id:milliseconds,
             task:data
         }
-        dispatch(addTodoListData(dat))
-        axios.post(process.env.REACT_APP_API_URL + '/add_task',dat)
-            .then((res) => console.log(res))
+        if(data != ''){
+            dispatch(addTodoListData(dat))
+            axios.post(process.env.REACT_APP_API_URL + '/add_task',dat)
+                .then((res) => console.log(res))
+        }
+
 
     }
 
@@ -93,7 +99,7 @@ function App() {
           <div>
               {itemsToRender}
           </div>
-
+         
 
       </div>
 

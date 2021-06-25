@@ -10,8 +10,14 @@ export function TodoListReducer(state = {}, action) {
             }
             break;
         case 'add-todo-list-data':
-            return{
-                data:[...state.data,action.payload]
+            if(state.data){
+                return{
+                    data:[...state.data,action.payload]
+                }
+            }else{
+                return{
+                    data:[action.payload]
+                }
             }
             break;
         case 'delete-todo-list-data':
